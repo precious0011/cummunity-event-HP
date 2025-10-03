@@ -11,9 +11,9 @@
   body {
     font-family: Arial, sans-serif;
     margin: 0; padding: 0;
-    line-height: 1.6;
     background: #f9f9f9;
     color: #333;
+    line-height: 1.6;
   }
   header {
     background-color: #0d6efd;
@@ -38,9 +38,9 @@
     text-decoration: underline;
   }
   main {
-    padding: 20px;
     max-width: 900px;
-    margin: auto;
+    margin: 20px auto;
+    padding: 0 15px;
   }
   .hero {
     background-color: #e9ecef;
@@ -112,10 +112,9 @@
     background-color: #e9ecef;
     margin-top: 40px;
   }
-  /* Hide sections by default except active */
+  /* Hide all sections by default except active */
   section { display: none; }
   section.active { display: block; }
-  /* Simple form */
   form {
     max-width: 400px;
     margin: auto;
@@ -282,36 +281,35 @@
     const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
     if (rsvps.length === 0) {
       rsvpList.innerHTML = '<li>No RSVPs yet.</li>';
-    } else {
-      rsvps.forEach(id => {
-        const event = eventsData.find(ev => ev.id === id);
-        if (event) {
-          const li = document.createElement('li');
-          li.textContent = `${event.title} on ${new Date(event.date).toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'})} at ${event.location}`;
-          rsvpList.appendChild(li);
-        }
-      });
+      return;
     }
+    rsvps.forEach(id => {
+      const event = eventsData.find(e => e.id === id);
+      if (event) {
+        const li = document.createElement('li');
+        li.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'})}`;
+        rsvpList.appendChild(li);
+      }
+    });
   }
 
-  // Login form handler (demo only)
+  // Login handling
   document.getElementById('login-form').addEventListener('submit', e => {
     e.preventDefault();
-    const email = document.getElementById('email').value;
-    localStorage.setItem('userEmail', email);
-    alert('Login is a demo only. No backend implemented.');
+    const emailInput = document.getElementById('email').value;
+    localStorage.setItem('userEmail', emailInput);
+    alert('Logged in as ' + emailInput);
     showSection('profile');
-    updateProfileUI();
   });
 
-  // Update Profile UI
+  // Update profile UI
   function updateProfileUI() {
     const emailSpan = document.getElementById('profile-email');
     const email = localStorage.getItem('userEmail') || 'Community Member';
     emailSpan.textContent = email;
   }
 
-  // Logout button handler
+  // Logout
   function logout() {
     localStorage.removeItem('userEmail');
     localStorage.removeItem('rsvps');
@@ -319,7 +317,7 @@
     showSection('home');
   }
 
-  // Initial load - show home by default
+  // On page load, show home
   showSection('home');
 </script>
 
