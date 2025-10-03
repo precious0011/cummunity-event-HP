@@ -86,7 +86,11 @@
     border-radius: 5px;
     font-weight: bold;
   }
-  .event-card button:hover {
+  .event-card button:disabled {
+    background-color: #6c757d;
+    cursor: default;
+  }
+  .event-card button:hover:enabled {
     background-color: #084ecf;
   }
   footer {
@@ -118,6 +122,19 @@
   }
   label {
     font-weight: bold;
+  }
+  #profile button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #profile button:hover {
+    background-color: #a71d2a;
   }
 </style>
 </head>
@@ -152,11 +169,9 @@
     <h2>User Profile</h2>
     <p>Welcome, Community Member</p>
     <p>Email: user@example.com</p>
+    <button onclick="logout()">Logout</button>
     <h3>Your RSVPs:</h3>
-    <ul id="rsvp-list">
-      <li>Community Clean-Up - 1 Oct 2025</li>
-      <li>Local Art Show - 10 Oct 2025</li>
-    </ul>
+    <ul id="rsvp-list"></ul>
   </section>
 
   <!-- Login Section -->
@@ -183,12 +198,34 @@
     sections.forEach(sec => sec.classList.remove('active'));
     document.getElementById(id).classList.add('active');
 
-    if(id === 'events') {
-      loadEvents();
-    }
+    if (id === 'events') loadEvents();
+    if (id === 'profile') loadRSVPs();
   }
 
-  // Mock event data (embedded here)
+  // Store login state in localStorage
+  document.getElementById('login-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const email = document.getElementById('email').value;
+    localStorage.setItem('userEmail', email);
+    alert(`Logged in as: ${email}`);
+    showSection('profile');
+    updateProfileUI();
+  });
+
+  function updateProfileUI() {
+    const email = localStorage.getItem('userEmail') || 'user@example.com';
+    document.querySelector('#profile p:nth-of-type(2)').textContent = `Email: ${email}`;
+  }
+
+  function logout() {
+    localStorage.removeItem('userEmail');
+    localStorage.removeItem('rsvps');
+    alert('Logged out.');
+    showSection('home');
+    updateProfileUI();
+  }
+
+  // Event data
   const eventsData = [
     {
       id: 1,
@@ -203,48 +240,76 @@
       date: "2025-10-10",
       location: "Community Center",
       description: "An exhibition by local artists."
+    },
+    {
+      id: 3,
+      title: "Halloween Costume Parade",
+      date: "2025-10-31",
+      location: "Downtown",
+      description: "Show off your costume at the annual parade!"
     }
   ];
 
   // Load events dynamically
   function loadEvents() {
     const container = document.getElementById('events-container');
-    container.innerHTML = ''; // clear old
+    container.innerHTML = '';
+    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
+
     eventsData.forEach(event => {
       const card = document.createElement('div');
       card.className = 'event-card';
+      const isRSVPed = rsvps.includes(event.id);
+
       card.innerHTML = `
         <h3>${event.title}</h3>
         <p><strong>Date:</strong> ${event.date}</p>
         <p><strong>Location:</strong> ${event.location}</p>
         <p>${event.description}</p>
-        <button onclick="rsvp('${event.title}', '${event.date}')">RSVP</button>
+        <button ${isRSVPed ? 'disabled' : ''} onclick="rsvp(${event.id}, this)">
+          ${isRSVPed ? "RSVP'd" : "RSVP"}
+        </button>
       `;
       container.appendChild(card);
     });
   }
 
-  // RSVP function adds event to RSVP list in profile
-  function rsvp(title, date) {
-    alert(`You RSVP'd for: ${title}`);
-    const rsvpList = document.getElementById('rsvp-list');
-    // Avoid duplicates
-    const existing = Array.from(rsvpList.children).some(li => li.textContent.includes(title));
-    if(!existing) {
-      const li = document.createElement('li');
-      li.textContent = `${title} - ${new Date(date).toLocaleDateString(undefined, {day:'numeric', month:'short', year:'numeric'})}`;
-      rsvpList.appendChild(li);
+  // RSVP function
+  function rsvp(eventId, button) {
+    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
+    const event = eventsData.find(e => e.id === eventId);
+    if (!rsvps.includes(eventId)) {
+      rsvps.push(eventId);
+      localStorage.setItem('rsvps', JSON.stringify(rsvps));
+      button.disabled = true;
+      button.textContent = "RSVP'd";
+      alert(`You RSVP'd for: ${event.title}`);
     }
+    loadRSVPs();
   }
 
-  // Login form handler (demo only)
-  document.getElementById('login-form').addEventListener('submit', e => {
-    e.preventDefault();
-    alert('Login is a demo only. No backend implemented.');
-  });
+  // Load RSVPs into profile
+  function loadRSVPs() {
+    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
+    const rsvpList = document.getElementById('rsvp-list');
+    rsvpList.innerHTML = '';
 
-  // Load events initially if events page is shown by default
-  // (currently home is default, so events load on demand)
+    rsvps.forEach(id => {
+      const event = eventsData.find(e => e.id === id);
+      if (event) {
+        const li = document.createElement('li');
+        li.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}`;
+        rsvpList.appendChild(li);
+      }
+    });
+  }
+
+  // On page load
+  window.addEventListener('DOMContentLoaded', () => {
+    const email = localStorage.getItem('userEmail');
+    if (email) updateProfileUI();
+    showSection('home');
+  });
 </script>
 
 </body>
