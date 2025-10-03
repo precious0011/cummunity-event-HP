@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LCEH - Local Community Events Hub</title>
 <style>
-  /* Embedded CSS */
   * {
     box-sizing: border-box;
   }
@@ -67,6 +66,7 @@
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
     gap: 20px;
+    margin-bottom: 30px;
   }
   .event-card {
     background-color: white;
@@ -93,6 +93,17 @@
   .event-card button:disabled {
     background-color: #6c757d;
     cursor: default;
+  }
+  #rsvp-list {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 1px 1px 5px rgba(0,0,0,0.1);
+    max-width: 600px;
+    margin: auto;
+  }
+  #rsvp-list li {
+    margin-bottom: 10px;
   }
   footer {
     text-align: center;
@@ -140,26 +151,27 @@
 
 <main>
   <!-- Home Section -->
-  <section id="home" class="hero">
+  <section id="home" class="active hero">
     <h2>Welcome to Your Community Events Hub</h2>
     <p>Discover and attend events happening in your area.</p>
     <a class="btn" onclick="showSection('events')">View Events</a>
   </section>
 
   <!-- Events Section -->
-  <section id="events" class="active">
+  <section id="events">
     <h2>Events</h2>
     <div id="events-container" class="events-list"></div>
+
+    <h3>Your RSVPs:</h3>
+    <ul id="rsvp-list">
+      <li>No RSVPs yet.</li>
+    </ul>
   </section>
 
   <!-- Profile Section -->
   <section id="profile">
     <h2>User Profile</h2>
     <p>Welcome, <span id="profile-email">Community Member</span></p>
-    <h3>Your RSVPs:</h3>
-    <ul id="rsvp-list">
-      <li>No RSVPs yet.</li>
-    </ul>
     <button class="btn" onclick="logout()">Logout</button>
   </section>
 
@@ -189,9 +201,10 @@
 
     if (id === 'events') {
       loadEvents();
+      loadRSVPs();
+      updateProfileUI();
     }
     if (id === 'profile') {
-      loadRSVPs();
       updateProfileUI();
     }
   }
@@ -223,7 +236,6 @@
 
   // Load events into events section
   function loadEvents() {
-    console.log('Loading events...');
     const container = document.getElementById('events-container');
     container.innerHTML = '';
     eventsData.forEach(event => {
@@ -238,7 +250,7 @@
       `;
       container.appendChild(div);
     });
-    // Update RSVP buttons if already RSVPed
+    // Disable RSVP buttons for already RSVPed events
     const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
     rsvps.forEach(id => updateRSVPButton(id, true));
   }
@@ -251,6 +263,7 @@
       localStorage.setItem('rsvps', JSON.stringify(rsvps));
       alert('RSVP confirmed!');
       updateRSVPButton(id, true);
+      loadRSVPs(); // refresh RSVP list
     }
   }
 
@@ -262,7 +275,7 @@
     }
   }
 
-  // Load RSVPs for profile page
+  // Load RSVPs for events section
   function loadRSVPs() {
     const rsvpList = document.getElementById('rsvp-list');
     rsvpList.innerHTML = '';
@@ -286,27 +299,28 @@
     e.preventDefault();
     const email = document.getElementById('email').value;
     localStorage.setItem('userEmail', email);
-    alert(`Logged in as: ${email}`);
-    updateProfileUI();
+    alert('Login is a demo only. No backend implemented.');
     showSection('profile');
+    updateProfileUI();
   });
 
+  // Update Profile UI
   function updateProfileUI() {
-    const email = localStorage.getItem('userEmail');
-    document.getElementById('profile-email').textContent = email || 'Community Member';
+    const emailSpan = document.getElementById('profile-email');
+    const email = localStorage.getItem('userEmail') || 'Community Member';
+    emailSpan.textContent = email;
   }
 
+  // Logout button handler
   function logout() {
     localStorage.removeItem('userEmail');
     localStorage.removeItem('rsvps');
     alert('Logged out.');
-    updateProfileUI();
     showSection('home');
   }
 
-  // Initialize page
-  updateProfileUI();
-  loadEvents();
+  // Initial load - show home by default
+  showSection('home');
 </script>
 
 </body>
