@@ -43,12 +43,38 @@
     max-width: 900px;
     margin: auto;
   }
+  /* Home Section Styles */
   .hero {
-    background-color: #e9ecef;
-    padding: 40px 20px;
-    text-align: center;
+    color: white;
+    padding: 60px 20px;
     border-radius: 8px;
     margin-bottom: 20px;
+    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80') no-repeat center/cover;
+    text-align: center;
+  }
+  .hero h2 {
+    font-size: 2.8em;
+    margin-bottom: 10px;
+  }
+  .hero p {
+    font-size: 1.3em;
+    max-width: 600px;
+    margin: 0 auto 30px auto;
+  }
+  .highlighted-event {
+    max-width: 700px;
+    margin: 0 auto 40px auto;
+    background: rgba(255,255,255,0.15);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    text-align: left;
+  }
+  .highlighted-event h3 {
+    margin-top: 0;
+  }
+  .highlighted-event h4 {
+    margin: 5px 0 10px 0;
   }
   .btn {
     display: inline-block;
@@ -58,10 +84,34 @@
     text-decoration: none;
     border-radius: 6px;
     margin-top: 15px;
+    font-weight: 700;
+    font-size: 1.1em;
+    cursor: pointer;
+    border: none;
   }
   .btn:hover {
     background-color: #084ecf;
   }
+  .features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 800px;
+    margin: auto;
+  }
+  .feature-box {
+    background: white;
+    color: #0d6efd;
+    padding: 20px;
+    border-radius: 8px;
+    width: 200px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    text-align: center;
+  }
+  .feature-box h3 {
+    margin-top: 0;
+  }
+  /* Events Section */
   .events-list {
     display: grid;
     grid-template-columns: repeat(auto-fill,minmax(280px,1fr));
@@ -93,6 +143,21 @@
   .event-card button:hover:enabled {
     background-color: #084ecf;
   }
+  /* Profile Section */
+  #profile button {
+    background-color: #dc3545;
+    color: white;
+    border: none;
+    padding: 10px 18px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  #profile button:hover {
+    background-color: #a71d2a;
+  }
+  /* Footer */
   footer {
     text-align: center;
     padding: 15px;
@@ -123,19 +188,6 @@
   label {
     font-weight: bold;
   }
-  #profile button {
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 10px 18px;
-    border-radius: 5px;
-    cursor: pointer;
-    font-weight: bold;
-    margin-bottom: 20px;
-  }
-  #profile button:hover {
-    background-color: #a71d2a;
-  }
 </style>
 </head>
 <body>
@@ -154,8 +206,29 @@
   <!-- Home Section -->
   <section id="home" class="active hero">
     <h2>Welcome to Your Community Events Hub</h2>
-    <p>Discover and attend events happening in your area.</p>
-    <a class="btn" onclick="showSection('events')">View Events</a>
+    <p>Discover exciting events, connect with your neighbors, and make your community vibrant.</p>
+
+    <div class="highlighted-event">
+      <h3>Upcoming Highlight</h3>
+      <h4>Community Clean-Up - 1 Oct 2025</h4>
+      <p>Join us in making our local park cleaner and greener. Bring friends and family!</p>
+      <button class="btn" onclick="showSection('events')">RSVP Now</button>
+    </div>
+
+    <div class="features">
+      <div class="feature-box">
+        <h3>Find Events</h3>
+        <p>Browse local happenings easily.</p>
+      </div>
+      <div class="feature-box">
+        <h3>RSVP Easily</h3>
+        <p>Secure your spot with one click.</p>
+      </div>
+      <div class="feature-box">
+        <h3>Connect</h3>
+        <p>Meet and grow with your neighbors.</p>
+      </div>
+    </div>
   </section>
 
   <!-- Events Section -->
@@ -242,75 +315,3 @@
       description: "An exhibition by local artists."
     },
     {
-      id: 3,
-      title: "Halloween Costume Parade",
-      date: "2025-10-31",
-      location: "Downtown",
-      description: "Show off your costume at the annual parade!"
-    }
-  ];
-
-  // Load events dynamically
-  function loadEvents() {
-    const container = document.getElementById('events-container');
-    container.innerHTML = '';
-    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
-
-    eventsData.forEach(event => {
-      const card = document.createElement('div');
-      card.className = 'event-card';
-      const isRSVPed = rsvps.includes(event.id);
-
-      card.innerHTML = `
-        <h3>${event.title}</h3>
-        <p><strong>Date:</strong> ${event.date}</p>
-        <p><strong>Location:</strong> ${event.location}</p>
-        <p>${event.description}</p>
-        <button ${isRSVPed ? 'disabled' : ''} onclick="rsvp(${event.id}, this)">
-          ${isRSVPed ? "RSVP'd" : "RSVP"}
-        </button>
-      `;
-      container.appendChild(card);
-    });
-  }
-
-  // RSVP function
-  function rsvp(eventId, button) {
-    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
-    const event = eventsData.find(e => e.id === eventId);
-    if (!rsvps.includes(eventId)) {
-      rsvps.push(eventId);
-      localStorage.setItem('rsvps', JSON.stringify(rsvps));
-      button.disabled = true;
-      button.textContent = "RSVP'd";
-      alert(`You RSVP'd for: ${event.title}`);
-    }
-    loadRSVPs();
-  }
-
-  // Load RSVPs into profile
-  function loadRSVPs() {
-    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
-    const rsvpList = document.getElementById('rsvp-list');
-    rsvpList.innerHTML = '';
-
-    rsvps.forEach(id => {
-      const event = eventsData.find(e => e.id === id);
-      if (event) {
-        const li = document.createElement('li');
-        li.textContent = `${event.title} - ${new Date(event.date).toLocaleDateString(undefined, { day: 'numeric', month: 'short', year: 'numeric' })}`;
-        rsvpList.appendChild(li);
-      }
-    });
-  }
-
-  // On page load
-  window.addEventListener('DOMContentLoaded', () => {
-    const email = localStorage.getItem('userEmail');
-    if (email) updateProfileUI();
-    showSection('home');
-  });
-</script>
-
-</body>
-</html>
