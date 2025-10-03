@@ -5,12 +5,12 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>LCEH - Local Community Events Hub</title>
 <style>
-  /* Embedded CSS */
+  /* Reset and basics */
   * {
     box-sizing: border-box;
   }
   body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0; padding: 0;
     line-height: 1.6;
     background: #f9f9f9;
@@ -27,90 +27,133 @@
   header h1 {
     margin: 0;
     font-size: 1.8em;
+    letter-spacing: 2px;
   }
   nav a {
     color: white;
-    margin-left: 15px;
+    margin-left: 20px;
     text-decoration: none;
-    font-weight: bold;
+    font-weight: 700;
     cursor: pointer;
+    font-size: 1.1em;
+    transition: color 0.3s ease;
   }
   nav a:hover {
+    color: #bcd0ff;
     text-decoration: underline;
   }
   main {
-    padding: 20px;
     max-width: 900px;
     margin: auto;
+    padding: 20px;
   }
-  /* Home Section Styles */
-  .hero {
+
+  /* --- New Home Section Styles --- */
+  #home {
+    position: relative;
     color: white;
-    padding: 60px 20px;
-    border-radius: 8px;
-    margin-bottom: 20px;
-    background: linear-gradient(rgba(13, 110, 253, 0.8), rgba(13, 110, 253, 0.8)), url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=900&q=80') no-repeat center/cover;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 40px;
+  }
+  #home::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: url('https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+    filter: brightness(0.45);
+    z-index: 0;
+  }
+  #home .content {
+    position: relative;
+    z-index: 1;
+    padding: 60px 30px;
     text-align: center;
   }
-  .hero h2 {
-    font-size: 2.8em;
-    margin-bottom: 10px;
+  #home h2 {
+    font-size: 3.2rem;
+    margin-bottom: 20px;
+    font-weight: 900;
+    letter-spacing: 1.5px;
+    text-shadow: 2px 2px 8px rgba(0,0,0,0.7);
   }
-  .hero p {
-    font-size: 1.3em;
-    max-width: 600px;
-    margin: 0 auto 30px auto;
-  }
-  .highlighted-event {
-    max-width: 700px;
+  #home p.tagline {
+    font-size: 1.4rem;
+    max-width: 650px;
     margin: 0 auto 40px auto;
-    background: rgba(255,255,255,0.15);
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 15px rgba(0,0,0,0.2);
-    text-align: left;
-  }
-  .highlighted-event h3 {
-    margin-top: 0;
-  }
-  .highlighted-event h4 {
-    margin: 5px 0 10px 0;
+    font-weight: 500;
+    text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
   }
   .btn {
-    display: inline-block;
-    background-color: #0d6efd;
-    color: white;
-    padding: 12px 25px;
-    text-decoration: none;
-    border-radius: 6px;
-    margin-top: 15px;
+    background-color: #ffc107; /* bright amber */
+    color: #333;
     font-weight: 700;
-    font-size: 1.1em;
-    cursor: pointer;
+    padding: 16px 40px;
+    border-radius: 40px;
     border: none;
+    font-size: 1.3rem;
+    cursor: pointer;
+    box-shadow: 0 5px 15px rgba(255,193,7,0.6);
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
   }
   .btn:hover {
-    background-color: #084ecf;
+    background-color: #e0a800;
+    box-shadow: 0 7px 20px rgba(224,168,0,0.8);
   }
+  /* Highlight card */
+  .highlight-card {
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 30px;
+    max-width: 700px;
+    margin: 0 auto 50px auto;
+    box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+  }
+  .highlight-card h3 {
+    margin-top: 0;
+    font-size: 1.8rem;
+    font-weight: 700;
+  }
+  .highlight-card h4 {
+    margin: 10px 0 20px 0;
+    font-size: 1.3rem;
+    font-weight: 600;
+  }
+  .highlight-card p {
+    font-size: 1.1rem;
+    line-height: 1.4;
+  }
+  /* Feature boxes */
   .features {
     display: flex;
     justify-content: center;
     gap: 30px;
-    max-width: 800px;
-    margin: auto;
+    max-width: 900px;
+    margin: 0 auto 20px auto;
   }
   .feature-box {
     background: white;
     color: #0d6efd;
-    padding: 20px;
-    border-radius: 8px;
-    width: 200px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    flex: 1 1 200px;
+    border-radius: 12px;
+    padding: 25px 20px;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.15);
     text-align: center;
+    font-weight: 700;
+    font-size: 1.15rem;
+    cursor: default;
+    transition: transform 0.3s ease;
   }
-  .feature-box h3 {
-    margin-top: 0;
+  .feature-box:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
   }
+  .feature-box .icon {
+    font-size: 3rem;
+    margin-bottom: 15px;
+  }
+
   /* Events Section */
   .events-list {
     display: grid;
@@ -136,14 +179,14 @@
     border-radius: 5px;
     font-weight: bold;
   }
-  .event-card button:disabled {
-    background-color: #6c757d;
-    cursor: default;
-  }
-  .event-card button:hover:enabled {
+  .event-card button:hover {
     background-color: #084ecf;
   }
   /* Profile Section */
+  #profile {
+    max-width: 600px;
+    margin: auto;
+  }
   #profile button {
     background-color: #dc3545;
     color: white;
@@ -204,29 +247,34 @@
 
 <main>
   <!-- Home Section -->
-  <section id="home" class="active hero">
-    <h2>Welcome to Your Community Events Hub</h2>
-    <p>Discover exciting events, connect with your neighbors, and make your community vibrant.</p>
+  <section id="home" class="active">
+    <div class="content">
+      <h2>Welcome to Your Community Events Hub</h2>
+      <p class="tagline">Discover exciting events, connect with your neighbors, and make your community vibrant.</p>
 
-    <div class="highlighted-event">
-      <h3>Upcoming Highlight</h3>
-      <h4>Community Clean-Up - 1 Oct 2025</h4>
-      <p>Join us in making our local park cleaner and greener. Bring friends and family!</p>
-      <button class="btn" onclick="showSection('events')">RSVP Now</button>
-    </div>
+      <div class="highlight-card">
+        <h3>Upcoming Highlight</h3>
+        <h4>🌿 Community Clean-Up - 1 Oct 2025</h4>
+        <p>Join us in making our local park cleaner and greener. Bring friends and family!</p>
+        <button class="btn" onclick="showSection('events')">RSVP Now</button>
+      </div>
 
-    <div class="features">
-      <div class="feature-box">
-        <h3>Find Events</h3>
-        <p>Browse local happenings easily.</p>
-      </div>
-      <div class="feature-box">
-        <h3>RSVP Easily</h3>
-        <p>Secure your spot with one click.</p>
-      </div>
-      <div class="feature-box">
-        <h3>Connect</h3>
-        <p>Meet and grow with your neighbors.</p>
+      <div class="features">
+        <div class="feature-box">
+          <div class="icon">📅</div>
+          Find Events<br>
+          Browse local happenings easily.
+        </div>
+        <div class="feature-box">
+          <div class="icon">✅</div>
+          RSVP Easily<br>
+          Secure your spot with one click.
+        </div>
+        <div class="feature-box">
+          <div class="icon">🤝</div>
+          Connect<br>
+          Meet and grow with your neighbors.
+        </div>
       </div>
     </div>
   </section>
@@ -240,11 +288,12 @@
   <!-- Profile Section -->
   <section id="profile">
     <h2>User Profile</h2>
-    <p>Welcome, Community Member</p>
-    <p>Email: user@example.com</p>
+    <p>Welcome, <span id="profile-email">Community Member</span></p>
     <button onclick="logout()">Logout</button>
     <h3>Your RSVPs:</h3>
-    <ul id="rsvp-list"></ul>
+    <ul id="rsvp-list">
+      <!-- RSVPs loaded here -->
+    </ul>
   </section>
 
   <!-- Login Section -->
@@ -281,21 +330,21 @@
     const email = document.getElementById('email').value;
     localStorage.setItem('userEmail', email);
     alert(`Logged in as: ${email}`);
-    showSection('profile');
     updateProfileUI();
+    showSection('profile');
   });
 
   function updateProfileUI() {
-    const email = localStorage.getItem('userEmail') || 'user@example.com';
-    document.querySelector('#profile p:nth-of-type(2)').textContent = `Email: ${email}`;
+    const email = localStorage.getItem('userEmail');
+    document.getElementById('profile-email').textContent = email || 'Community Member';
   }
 
   function logout() {
     localStorage.removeItem('userEmail');
     localStorage.removeItem('rsvps');
     alert('Logged out.');
-    showSection('home');
     updateProfileUI();
+    showSection('home');
   }
 
   // Event data
@@ -315,3 +364,73 @@
       description: "An exhibition by local artists."
     },
     {
+      id: 3,
+      title: "Farmers Market",
+      date: "2025-10-15",
+      location: "Town Square",
+      description: "Fresh produce and local crafts."
+    }
+  ];
+
+  // Load events into events section
+  function loadEvents() {
+    const container = document.getElementById('events-container');
+    container.innerHTML = '';
+    eventsData.forEach(event => {
+      const div = document.createElement('div');
+      div.className = 'event-card';
+      div.innerHTML = `
+        <h3>${event.title}</h3>
+        <p><strong>Date:</strong> ${event.date}</p>
+        <p><strong>Location:</strong> ${event.location}</p>
+        <p>${event.description}</p>
+        <button onclick="rsvpEvent(${event.id})" id="rsvp-btn-${event.id}">RSVP</button>
+      `;
+      container.appendChild(div);
+    });
+  }
+
+  // RSVP handling
+  function rsvpEvent(id) {
+    let rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
+    if (!rsvps.includes(id)) {
+      rsvps.push(id);
+      localStorage.setItem('rsvps', JSON.stringify(rsvps));
+      alert('RSVP confirmed!');
+      updateRSVPButton(id, true);
+    }
+  }
+
+  function updateRSVPButton(id, disabled) {
+    const btn = document.getElementById('rsvp-btn-' + id);
+    if (btn) {
+      btn.disabled = disabled;
+      btn.textContent = disabled ? 'RSVPed' : 'RSVP';
+    }
+  }
+
+  function loadRSVPs() {
+    const rsvpList = document.getElementById('rsvp-list');
+    rsvpList.innerHTML = '';
+    const rsvps = JSON.parse(localStorage.getItem('rsvps')) || [];
+    if (rsvps.length === 0) {
+      rsvpList.innerHTML = '<li>No RSVPs yet.</li>';
+    } else {
+      rsvps.forEach(id => {
+        const event = eventsData.find(ev => ev.id === id);
+        if (event) {
+          const li = document.createElement('li');
+          li.textContent = `${event.title} on ${event.date} at ${event.location}`;
+          rsvpList.appendChild(li);
+          updateRSVPButton(id, true);
+        }
+      });
+    }
+  }
+
+  // On page load
+  updateProfileUI();
+</script>
+
+</body>
+</html>
