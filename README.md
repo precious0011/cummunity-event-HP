@@ -3,11 +3,9 @@ from tkinter import messagebox
 import sqlite3
 
 # ---------------- DATABASE ----------------
-# using sqlite because its simple for this project
 conn = sqlite3.connect("glh_final.db")
 cursor = conn.cursor()
 
-# create tables
 cursor.execute("""
 CREATE TABLE IF NOT EXISTS users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -58,7 +56,7 @@ if cursor.fetchone()[0] == 0:
 # ---------------- MAIN WINDOW ----------------
 root = tk.Tk()
 root.title("Greenfield Local Hub")
-root.geometry("750x550")
+root.geometry("800x600")
 root.configure(bg="#e8f5e9")
 
 # header
@@ -73,12 +71,10 @@ tk.Label(header, text="Greenfield Local Hub",
 card = tk.Frame(root, bg="white", bd=2, relief="raised")
 card.place(relx=0.5, rely=0.5, anchor="center", width=420, height=350)
 
-# logo (make sure file exists)
+# logo
 try:
-    logo = tk.PhotoImage(file=r"C:\Users\TLevel-Digital-OS-11\Desktop\Version control\images\logo.png")
-    lbl = tk.Label(card, image=logo, bg="white")
-    lbl.image = logo
-    lbl.pack(pady=5)
+    logo = tk.PhotoImage(file="images/logo.png")
+    tk.Label(card, image=logo, bg="white").pack(pady=5)
 except:
     tk.Label(card, text="[Logo here]", bg="white").pack()
 
@@ -102,7 +98,6 @@ def open_login():
     password.pack()
 
     def login():
-        # had issue before so cleaned inputs
         e = email.get().strip().lower()
         p = password.get().strip()
 
@@ -130,9 +125,7 @@ def open_register(prev):
     win.geometry("350x450")
 
     fields = {}
-    labels = ["Username", "Email", "Password", "Address", "County"]
-
-    for l in labels:
+    for l in ["Username", "Email", "Password", "Address", "County"]:
         tk.Label(win, text=l).pack()
         ent = tk.Entry(win, show="*" if l=="Password" else None)
         ent.pack()
@@ -155,7 +148,6 @@ def open_register(prev):
         VALUES (?, ?, ?, ?, ?)
         """, (data["Username"], data["Email"].lower(),
               data["Password"], data["Address"], data["County"]))
-
         conn.commit()
 
         win.destroy()
@@ -163,7 +155,7 @@ def open_register(prev):
 
     tk.Button(win, text="Register", bg="#4CAF50", fg="white",
               command=register).pack(pady=15)
-    
+
 # ---------------- CUSTOMER DASHBOARD ----------------
 def open_customer_dashboard(user):
     dash = tk.Toplevel(root)
@@ -172,57 +164,28 @@ def open_customer_dashboard(user):
 
     user_email = user[2]
     cart = []
-    try:
-        imgs = {
-            "Milk": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\milk.png"),
-            "Bread": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\bread.png"),
-            "Eggs": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\egg.png"),
-            "Vegetables": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/veg.png"),
-            "Apple": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/apple.png"),
-            "Cheese": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/cheese.png"),
-            "Juice": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/juice.png"),
-            "Chicken": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/chicken.png")
-        }
-    except Exception as e:
-        print(f"Error loading images: {e}")
-        imgs = {}
 
-        
-    # HEADER
+    # load images
+    imgs = {}
+    for name in ["Milk","Bread","Eggs","Vegetables","Apple","Cheese","Juice","Chicken"]:
+        try:
+            imgs[name] = tk.PhotoImage(file=f"images/{name.lower()}.png").subsample(2,2)
+        except:
+            imgs[name] = None
+
+    # header
     header = tk.Frame(dash, bg="#2e7d32")
     header.pack(fill="x")
 
     tk.Label(header, text="GLH Store", fg="white", bg="#2e7d32",
              font=("Arial", 16)).pack(side="left", padx=10)
 
-    # SEARCH BAR
+    # search
     search_entry = tk.Entry(header)
     search_entry.pack(side="left", padx=10)
 
-    def search_products():
-        keyword = search_entry.get()
-        cursor.execute("SELECT name, price FROM products WHERE name LIKE ?",
-                       ('%' + keyword + '%',))
-        display_products(cursor.fetchall())
-
-    tk.Button(header, text="Search", command=search_products).pack(side="left")
-
-    # CART
-    def view_cart():
-        win = tk.Toplevel(dash)
-        total = sum([i[1] for i in cart])
-
-        for i in cart:
-            tk.Label(win, text=f"{i[0]} - £{i[1]}").pack()
-
-        tk.Label(win, text=f"Total £{total}").pack()
-
-    tk.Button(header, text="Cart", command=view_cart).pack(side="right")
-
-    # PRODUCTS AREA
     main = tk.Frame(dash)
     main.pack(pady=20)
-
 
     def add_to_cart(n, p):
         cart.append((n, p))
@@ -234,43 +197,62 @@ def open_customer_dashboard(user):
 
         r = c = 0
         for p in products:
-            box = tk.Frame(main, bd=1, relief="solid")
+            box = tk.Frame(main, bd=1, relief="solid", bg="white", padx=10, pady=10)
             box.grid(row=r, column=c, padx=15, pady=15)
 
-            
-            #if images[p[0]]:
-                #lbl = tk.Label(box, image=images[p[0]])
-               # lbl.image = images[p[0]]
-              #  lbl.pack()
-            #else:
-             #   tk.Label(box, text=p[0]).pack()
+            if imgs[p[0]]:
+                lbl = tk.Label(box, image=imgs[p[0]], bg="white")
+                lbl.image = imgs[p[0]]
+                lbl.pack()
+            else:
+                tk.Label(box, text=p[0], bg="white").pack()
 
-            tk.Label(box, text=f"£{p[1]}", fg="green").pack()
+            tk.Label(box, text=p[0], font=("Arial", 10, "bold"), bg="white").pack()
+            tk.Label(box, text=f"£{p[1]}", fg="green", bg="white").pack()
 
             tk.Button(box, text="Add",
-                      command=lambda n=p[0], pr=p[1]: add_to_cart(n, pr)).pack()
+                      command=lambda n=p[0], pr=p[1]: add_to_cart(n, pr)).pack(pady=5)
 
             c += 1
             if c == 3:
                 c = 0
                 r += 1
 
+    def search_products():
+        keyword = search_entry.get()
+        cursor.execute("SELECT name, price FROM products WHERE name LIKE ?",
+                       ('%' + keyword + '%',))
+        display_products(cursor.fetchall())
+
+    tk.Button(header, text="Search", command=search_products).pack(side="left")
+
+    def view_cart():
+        win = tk.Toplevel(dash)
+        total = sum([i[1] for i in cart])
+
+        for i in cart:
+            tk.Label(win, text=f"{i[0]} - £{i[1]}").pack()
+
+        tk.Label(win, text=f"Total £{total}").pack()
+
+    tk.Button(header, text="Cart", command=view_cart).pack(side="right")
+
     cursor.execute("SELECT name, price FROM products")
     display_products(cursor.fetchall())
-    
+
 # ---------------- PRODUCER DASHBOARD ----------------
 def open_producer_dashboard():
     dash = tk.Toplevel(root)
     dash.title("Producer Dashboard")
-    dash.geometry("800x500")
+    dash.geometry("900x600")
+    dash.configure(bg="#f5f5f5")
 
-    title = tk.Label(dash, text="Producer Dashboard",
-                     font=("Arial", 18, "bold"))
-    title.pack(pady=10)
+    tk.Label(dash, text="Producer Dashboard",
+             font=("Arial", 18, "bold"),
+             bg="#f5f5f5").pack(pady=10)
 
-    frame = tk.Frame(dash)
+    frame = tk.Frame(dash, bg="#f5f5f5")
     frame.pack(pady=20)
-
 
     def view_products():
         for w in frame.winfo_children():
@@ -278,21 +260,27 @@ def open_producer_dashboard():
 
         cursor.execute("SELECT name, price, stock FROM products")
         for p in cursor.fetchall():
-            box = tk.Frame(frame, bd=1, relief="solid", padx=10, pady=5)
-            box.pack(pady=5, fill="x")
+            box = tk.Frame(frame, bg="white", bd=2, relief="groove", padx=10, pady=10)
+            box.pack(pady=8, fill="x", padx=20)
 
-            tk.Label(box, text=f"{p[0]}").pack(side="left")
-            tk.Label(box, text=f"£{p[1]}").pack(side="left", padx=20)
-            tk.Label(box, text=f"Stock: {p[2]}").pack(side="right")
+            tk.Label(box, text=p[0], font=("Arial", 12, "bold"),
+                     bg="white").pack(side="left")
+
+            tk.Label(box, text=f"£{p[1]}", fg="green",
+                     bg="white").pack(side="left", padx=20)
+
+            color = "red" if p[2] < 5 else "green"
+            tk.Label(box, text=f"Stock: {p[2]}",
+                     fg=color, bg="white").pack(side="right")
 
     def update_stock():
         win = tk.Toplevel(dash)
 
-        tk.Label(win, text="Product name").pack()
+        tk.Label(win, text="Product").pack()
         name = tk.Entry(win)
         name.pack()
 
-        tk.Label(win, text="New stock").pack()
+        tk.Label(win, text="Stock").pack()
         stock = tk.Entry(win)
         stock.pack()
 
@@ -300,19 +288,15 @@ def open_producer_dashboard():
             cursor.execute("UPDATE products SET stock=? WHERE name=?",
                            (stock.get(), name.get()))
             conn.commit()
-            messagebox.showinfo("Done", "Stock updated")
+            messagebox.showinfo("Done", "Updated")
 
         tk.Button(win, text="Update", command=update).pack()
 
-    def view_orders():
-        win = tk.Toplevel(dash)
-        cursor.execute("SELECT user_email, items, total FROM orders")
-        for o in cursor.fetchall():
-            tk.Label(win, text=f"{o[0]} | {o[1]} | £{o[2]}").pack()
+    tk.Button(dash, text="View Products", bg="#4CAF50", fg="white",
+              width=20, command=view_products).pack(pady=10)
 
-    tk.Button(dash, text="View Products", command=view_products).pack(pady=10)
-    tk.Button(dash, text="Update Stock", command=update_stock).pack(pady=10)
-    tk.Button(dash, text="View Orders", command=view_orders).pack(pady=10)
+    tk.Button(dash, text="Update Stock", bg="#1976D2", fg="white",
+              width=20, command=update_stock).pack(pady=10)
 
 # ---------------- BUTTONS ----------------
 tk.Button(card, text="Customer", bg="#4CAF50", fg="white",
