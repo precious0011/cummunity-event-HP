@@ -172,7 +172,22 @@ def open_customer_dashboard(user):
 
     user_email = user[2]
     cart = []
+    try:
+        imgs = {
+            "Milk": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\milk.png"),
+            "Bread": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\bread.png"),
+            "Eggs": tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\egg.png"),
+            "Vegetables": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/veg.png"),
+            "Apple": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/apple.png"),
+            "Cheese": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/cheese.png"),
+            "Juice": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/juice.png"),
+            "Chicken": tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/chicken.png")
+        }
+    except Exception as e:
+        print(f"Error loading images: {e}")
+        imgs = {}
 
+        
     # HEADER
     header = tk.Frame(dash, bg="#2e7d32")
     header.pack(fill="x")
@@ -207,17 +222,7 @@ def open_customer_dashboard(user):
     # PRODUCTS AREA
     main = tk.Frame(dash)
     main.pack(pady=20)
-    # LOAD IMAGES
-    milk = tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\milk.png")
-    bread = tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\bread.png")
-    eggs = tk.PhotoImage(file=r"C:\Users\tlevel-digital-os-11\Desktop\Version control\images\egg.png")
-    veg = tk.PhotoImage(file=r"C:/Users/tlevel-digital-os-11/Desktop/Version control/images/veg.png")
-    products = [
-        ("Milk", 1.50, milk),
-        ("Bread", 1.20, bread),
-        ("Eggs", 2.50, eggs),
-        ("Vegetables", 3.00, veg),
-    ]
+
 
     def add_to_cart(n, p):
         cart.append((n, p))
@@ -232,10 +237,10 @@ def open_customer_dashboard(user):
             box = tk.Frame(main, bd=1, relief="solid")
             box.grid(row=r, column=c, padx=15, pady=15)
 
-            # IMAGE instead of text
-           # if images[p[0]]:
-            #    lbl = tk.Label(box, image=images[p[0]])
-             #   lbl.image = images[p[0]]
+            
+            #if images[p[0]]:
+                #lbl = tk.Label(box, image=images[p[0]])
+               # lbl.image = images[p[0]]
               #  lbl.pack()
             #else:
              #   tk.Label(box, text=p[0]).pack()
