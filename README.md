@@ -1,158 +1,98 @@
-
-
-⸻
-
-📊 Description of Each Question
-
-⸻
-
-🔹 Question 1 – What type of user are you?
-
-Purpose:
-To identify the type of respondent (technical or non-technical).
-
-Why it is important:
-
-* Allows comparison between different user groups
-* Helps analyse whether technical users view the system differently
-
-⸻
-
-🔹 Question 2 – What is your level of technical knowledge?
-
-Purpose:
-To measure the respondent’s technical ability.
-
-Why it is important:
-
-* Helps validate responses
-* Ensures feedback from advanced users is interpreted correctly
-
-⸻
-
-🔹 Question 3 – System Evaluation (Very good → Very bad)
-
-Categories:
-
-* Overall system design
-* Code structure
-* Use of SQLite
-* System security
-
-Purpose:
-To evaluate the technical quality of the system.
-
-Why it is important:
-
-* Provides measurable data on key technical aspects
-* Helps identify weaknesses such as security or structure
-
-⸻
-
-🔹 Question 4 – How easy was the system to use?
-
-Purpose:
-To measure overall usability.
-
-Why it is important:
-
-* Indicates how user-friendly the system is
-* Important for non-technical users
-
-⸻
-
-🔹 Question 5 – How clear was the user interface?
-
-Purpose:
-To evaluate the design and layout of the system.
-
-Why it is important:
-
-* Helps assess visual clarity and navigation
-* Identifies UI improvements needed
-
-⸻
-
-🔹 Question 6 – Customer Dashboard Features
-
-Categories:
-
-* Search feature
-* Order tracking system
-* Cart and checkout
-
-Purpose:
-To evaluate key customer features individually.
-
-Why it is important:
-
-* Provides detailed feedback on specific features
-* Helps identify which features need improvement
-
-⸻
-
-🔹 Question 7 – How good was the producer dashboard?
-
-Purpose:
-To evaluate the effectiveness of the producer/admin side.
-
-Why it is important:
-
-* Ensures both user roles are assessed
-* Helps improve business management features
-
-⸻
-
-🔹 Question 8 – Did the system run smoothly?
-
-Purpose:
-To assess system performance.
-
-Why it is important:
-
-* Identifies bugs or performance issues
-* Provides simple yes/no measurable feedback
-
-⸻
-
-🔹 Question 9 – Overall system rating
-
-Purpose:
-To give an overall evaluation score.
-
-Why it is important:
-
-* Summarises user satisfaction
-* Useful for comparison after improvements
-
-⸻
-
-🔹 Question 10 – Which feature interested you most?
-
-Purpose:
-To identify the most valuable feature.
-
-Why it is important:
-
-* Shows what users find most useful
-* Helps prioritise future development
-
-⸻
-
-🔹 Question 11 – What improvements would you suggest?
-
-Purpose:
-To collect detailed user suggestions.
-
-Why it is important:
-
-* Provides qualitative feedback
-* Helps generate realistic improvements for Task 3b
-
-⸻
-
-🎯 Strong Evaluation Sentence (Use This)
-
-The questionnaire was designed to collect both quantitative and qualitative data, ensuring that feedback is measurable, meaningful, and useful for identifying specific improvements to the system.
-
-⸻
+I asked five people and their responses for each question are 
+QUESTION 1
+Adil: Technical user
+Stephen: non-technical user
+Claire: Technical user
+Coby: Technical user
+Temi: non-technical user
+
+QUESTION 2
+Adil: Intermediate
+Stephen: non-technical user 
+Claire: Intermediate
+Coby: Beginner 
+Temi: non-technical user
+
+QUESTION 3
+Adil: 
+Very good	satisfactory 	Good	satisfactory 	satisfactory 
+
+Stephen: non-technical user
+Claire:
+
+Very good	Good	Very good	Very good	Very good
+
+Coby: 
+
+Good	Good	Very good	Very good	Very good
+
+Temi: non-technical user
+
+QUESTION 4
+Adil: 4
+Stephen:4
+Claire:5
+Coby: 5
+Temi: 5
+
+QUESTION 5
+Adil: Good
+Stephen: Good 
+Claire: Very good
+Coby: very good
+Temi: good 
+
+QUESTION 6
+Adil:
+	Satisfactory	Satisfactory	Very Easy
+
+Stephen: 
+Easy	Satisfactory	Very Easy
+
+Claire: 
+Very Easy	Very Easy	Very Easy
+
+Coby: 
+
+Very Easy	Easy	Very Easy
+
+Temi: 
+Very Easy	Easy	Very Easy
+
+
+QUESTION 7
+Adil: 4/5
+Stephen: 4/5
+Claire:4/5
+Coby:5/5
+Temi: 5/5
+
+QUESTION 8
+Adil: yes
+Stephen: yes 
+Claire: yes
+Coby: yes
+Temi: yes
+
+QUESTION 9
+Adil: 5/5
+Stephen: 4/4
+Claire: 5/5
+Coby:4/5
+Temi:5/5
+
+QUESTION 10
+Adil: Cart and checkout feature
+Stephen: The customer dashboard looks great
+Claire: the search feature is amazing and easy to use. The products were also displayed well. The GUI has an amazing colour scheme that makes it easy to read and it's very simple making it easy to use.
+Coby: 
+The checkout system, because it can provide a tracking ID.
+Temi: The producers Dashboard is easy to understand 
+
+QUESTION 11
+Adil: To register a new user, it opens a new window, so an improvement would be making everything be in one single window
+Stephen: The producers might have like an Id so not just anyone should access the producers dashboard
+Claire: 
+fixing the dashboard by reducing the gap between he buttons. I would also suggest hashing passwords for better security. I would also suggest showing the stock availability of the products.
+Coby: Product cards should be displayed using the same size.
+Temi: The system should be able to give a delivery status
