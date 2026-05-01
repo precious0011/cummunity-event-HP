@@ -1,98 +1,250 @@
-I asked five people and their responses for each question are 
-QUESTION 1
-Adil: Technical user
-Stephen: non-technical user
-Claire: Technical user
-Coby: Technical user
-Temi: non-technical user
+This is actually very strong data — 5 users (mixed technical + non-technical) is solid for your level. I’ll turn it into Task 3b-ready analysis with charts + conclusions.
 
-QUESTION 2
-Adil: Intermediate
-Stephen: non-technical user 
-Claire: Intermediate
-Coby: Beginner 
-Temi: non-technical user
+⸻
 
-QUESTION 3
-Adil: 
-Very good	satisfactory 	Good	satisfactory 	satisfactory 
+📊 Charts + Analysis + Conclusion (Each Question)
 
-Stephen: non-technical user
-Claire:
+⸻
 
-Very good	Good	Very good	Very good	Very good
+✅ Q1 – Type of User
 
-Coby: 
+Data:
 
-Good	Good	Very good	Very good	Very good
+* Technical: 3
+* Non-technical: 2
 
-Temi: non-technical user
+Chart (Bar Style):
 
-QUESTION 4
-Adil: 4
-Stephen:4
-Claire:5
-Coby: 5
-Temi: 5
+Technical        ███
+Non-technical    ██
 
-QUESTION 5
-Adil: Good
-Stephen: Good 
-Claire: Very good
-Coby: very good
-Temi: good 
+Analysis:
+Most respondents were technical users, meaning feedback includes deeper system evaluation.
 
-QUESTION 6
-Adil:
-	Satisfactory	Satisfactory	Very Easy
+Conclusion:
+The system was tested by a balanced group, but results slightly favour technical perspectives.
 
-Stephen: 
-Easy	Satisfactory	Very Easy
+⸻
 
-Claire: 
-Very Easy	Very Easy	Very Easy
+✅ Q2 – Technical Knowledge
 
-Coby: 
+Data:
 
-Very Easy	Easy	Very Easy
+* Intermediate: 2
+* Beginner: 1
+* Non-technical: 2
 
-Temi: 
-Very Easy	Easy	Very Easy
+Chart:
 
+Intermediate   ██
+Beginner       █
+Non-technical  ██
 
-QUESTION 7
-Adil: 4/5
-Stephen: 4/5
-Claire:4/5
-Coby:5/5
-Temi: 5/5
+Analysis:
+The mix ensures both usability (non-tech users) and system quality (technical users) are assessed.
 
-QUESTION 8
-Adil: yes
-Stephen: yes 
-Claire: yes
-Coby: yes
-Temi: yes
+Conclusion:
+Feedback is reliable across different skill levels.
 
-QUESTION 9
-Adil: 5/5
-Stephen: 4/4
-Claire: 5/5
-Coby:4/5
-Temi:5/5
+⸻
 
-QUESTION 10
-Adil: Cart and checkout feature
-Stephen: The customer dashboard looks great
-Claire: the search feature is amazing and easy to use. The products were also displayed well. The GUI has an amazing colour scheme that makes it easy to read and it's very simple making it easy to use.
-Coby: 
-The checkout system, because it can provide a tracking ID.
-Temi: The producers Dashboard is easy to understand 
+✅ Q3 – System Evaluation (Design, Code, SQLite, Security)
 
-QUESTION 11
-Adil: To register a new user, it opens a new window, so an improvement would be making everything be in one single window
-Stephen: The producers might have like an Id so not just anyone should access the producers dashboard
-Claire: 
-fixing the dashboard by reducing the gap between he buttons. I would also suggest hashing passwords for better security. I would also suggest showing the stock availability of the products.
-Coby: Product cards should be displayed using the same size.
-Temi: The system should be able to give a delivery status
+Summary Trend:
+
+* Mostly Very Good / Good
+* Few Satisfactory (mainly Adil)
+
+Analysis:
+
+* Strong ratings for design, SQLite usage, and security
+* Slight weakness in code structure (satisfactory ratings)
+
+Conclusion:
+The system is technically strong but could improve structure and optimisation.
+
+⸻
+
+✅ Q4 – Ease of Use (1–5)
+
+Data:
+
+* 5: 3 users
+* 4: 2 users
+
+Chart:
+
+5 ███
+4 ██
+
+Analysis:
+All users rated it highly → system is easy to use.
+
+Conclusion:
+The system is user-friendly for both technical and non-technical users.
+
+⸻
+
+✅ Q5 – User Interface Clarity
+
+Data:
+
+* Very Good: 2
+* Good: 3
+
+Chart:
+
+Very Good   ██
+Good        ███
+
+Analysis:
+UI is clear but not perfect.
+
+Conclusion:
+Design is effective but could be improved visually.
+
+⸻
+
+✅ Q6 – Customer Features
+
+🔹 Search Feature
+
+* Very Easy: 3
+* Easy: 1
+* Satisfactory: 1
+
+🔹 Order Tracking
+
+* Very Easy: 2
+* Easy: 2
+* Satisfactory: 1
+
+🔹 Cart & Checkout
+
+* Very Easy: 5
+
+Chart (Cart = strongest):
+
+Search        ███
+Tracking      ██
+Cart          █████
+
+Analysis:
+
+* Cart system is the strongest feature
+* Search and tracking are good but slightly inconsistent
+
+Conclusion:
+Core functionality works very well, especially checkout.
+
+⸻
+
+✅ Q7 – Producer Dashboard (Rating)
+
+Data:
+
+* 5/5: 2
+* 4/5: 3
+
+Chart:
+
+5 ███
+4 ██
+
+Analysis:
+Dashboard is effective but has minor usability/design issues.
+
+Conclusion:
+Producer dashboard is good but can be improved visually and structurally.
+
+⸻
+
+✅ Q8 – System Performance
+
+Data:
+
+* Yes: 5
+
+Chart:
+
+Yes █████
+
+Analysis:
+No crashes or errors reported.
+
+Conclusion:
+System is stable and reliable.
+
+⸻
+
+✅ Q9 – Overall Rating
+
+Data:
+
+* 5/5: 3
+* 4/5: 2
+
+Chart:
+
+5 ███
+4 ██
+
+Analysis:
+Very high satisfaction overall.
+
+Conclusion:
+The system successfully meets user requirements.
+
+⸻
+
+✅ Q10 – Most Liked Features
+
+Responses:
+
+* Cart & checkout
+* Customer dashboard
+* Search feature
+* Tracking system
+* Producer dashboard
+
+Analysis:
+Different users preferred different features → system is well-rounded.
+
+Conclusion:
+No single weak feature — multiple strengths across the system.
+
+⸻
+
+✅ Q11 – Suggested Improvements
+
+Key Themes Identified:
+
+* 🔐 Security (hash passwords, restrict producer access)
+* 🎨 UI improvements (spacing, consistent product cards)
+* 📦 Features (stock display, delivery tracking)
+* 🖥️ UX improvement (single window navigation)
+
+Analysis:
+Feedback is specific and actionable → very good quality responses.
+
+Conclusion:
+Clear improvements identified for next version.
+
+⸻
+
+🧠 OVERALL SYSTEM EVALUATION (FINAL CONCLUSION)
+
+The Greenfield Local Hub system performed very well across all test areas. Users found the system easy to use, visually clear, and functionally effective. Key features such as the cart, checkout system, and tracking functionality were highly rated, showing that the core requirements were successfully met.
+
+The system also demonstrated strong performance and reliability, with all users confirming it ran smoothly without errors.
+
+However, feedback identified several areas for improvement, including:
+
+* Enhancing security (e.g. password hashing and restricted access)
+* Improving user interface consistency
+* Adding more advanced features such as delivery status and stock visibility
+
+Overall, the system is a successful solution that meets user needs, with clear opportunities for further development in future versions.
+
+⸻
+
