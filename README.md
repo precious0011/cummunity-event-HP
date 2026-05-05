@@ -1,250 +1,82 @@
-This is actually very strong data — 5 users (mixed technical + non-technical) is solid for your level. I’ll turn it into Task 3b-ready analysis with charts + conclusions.
+
+
+Overview
+
+The Greenfield Local Hub system was evaluated using feedback collected from five users. These users included both technical and non-technical participants, ensuring that the system was assessed from different perspectives. The purpose of this evaluation is to determine how effectively the system meets its intended requirements and to identify strengths and areas for improvement.
 
 ⸻
 
-📊 Charts + Analysis + Conclusion (Each Question)
+Overall Effectiveness
+
+The system was rated highly overall, with most users giving a score of 4 or 5 out of 5. In addition, all users confirmed that the system ran smoothly without errors. This indicates that the system is reliable and successfully fulfils its main purpose of allowing users to browse products, place orders, and manage data.
 
 ⸻
 
-✅ Q1 – Type of User
+Usability
 
-Data:
-
-* Technical: 3
-* Non-technical: 2
-
-Chart (Bar Style):
-
-Technical        ███
-Non-technical    ██
-
-Analysis:
-Most respondents were technical users, meaning feedback includes deeper system evaluation.
-
-Conclusion:
-The system was tested by a balanced group, but results slightly favour technical perspectives.
+The system was found to be easy to use, with the majority of users rating usability as 4 or 5 out of 5. The user interface was rated as Good to Very Good, suggesting that the layout is clear and easy to navigate. Importantly, non-technical users were also able to use the system effectively, demonstrating that it is accessible to a wide range of users.
 
 ⸻
 
-✅ Q2 – Technical Knowledge
+Functionality
 
-Data:
-
-* Intermediate: 2
-* Beginner: 1
-* Non-technical: 2
-
-Chart:
-
-Intermediate   ██
-Beginner       █
-Non-technical  ██
-
-Analysis:
-The mix ensures both usability (non-tech users) and system quality (technical users) are assessed.
-
-Conclusion:
-Feedback is reliable across different skill levels.
+The key features of the system performed effectively. The cart and checkout system received the highest ratings, with all users finding it very easy to use. The search feature was also rated positively, allowing users to quickly locate products. The order tracking feature was effective but received slightly lower ratings, suggesting minor improvements could be made. Overall, the system meets its functional requirements.
 
 ⸻
 
-✅ Q3 – System Evaluation (Design, Code, SQLite, Security)
+Technical Performance
 
-Summary Trend:
-
-* Mostly Very Good / Good
-* Few Satisfactory (mainly Adil)
-
-Analysis:
-
-* Strong ratings for design, SQLite usage, and security
-* Slight weakness in code structure (satisfactory ratings)
-
-Conclusion:
-The system is technically strong but could improve structure and optimisation.
+The system demonstrated strong technical performance, with no crashes or errors reported during testing. The use of SQLite was effective in managing user data, product information, and orders. This shows that the system is stable and capable of handling its intended operations.
 
 ⸻
 
-✅ Q4 – Ease of Use (1–5)
+Strengths
 
-Data:
+The main strengths of the system include:
 
-* 5: 3 users
-* 4: 2 users
-
-Chart:
-
-5 ███
-4 ██
-
-Analysis:
-All users rated it highly → system is easy to use.
-
-Conclusion:
-The system is user-friendly for both technical and non-technical users.
+* A user-friendly interface suitable for both technical and non-technical users
+* Effective and reliable core features, particularly the checkout system
+* Clear and simple navigation
+* Stable performance with no reported errors
+* Efficient use of a database to manage system data
 
 ⸻
 
-✅ Q5 – User Interface Clarity
+Limitations
 
-Data:
+Despite its strengths, the system has several limitations:
 
-* Very Good: 2
-* Good: 3
-
-Chart:
-
-Very Good   ██
-Good        ███
-
-Analysis:
-UI is clear but not perfect.
-
-Conclusion:
-Design is effective but could be improved visually.
+* Passwords are not securely stored (no hashing implemented)
+* The producer dashboard does not have restricted access
+* Minor user interface issues, such as inconsistent layout and spacing
+* Lack of additional features such as delivery status updates
+* Product stock levels are not visible to customers
+* Navigation relies on multiple windows, which may reduce usability
 
 ⸻
 
-✅ Q6 – Customer Features
+Improvements
 
-🔹 Search Feature
+Based on the feedback collected, the following improvements are recommended:
 
-* Very Easy: 3
-* Easy: 1
-* Satisfactory: 1
-
-🔹 Order Tracking
-
-* Very Easy: 2
-* Easy: 2
-* Satisfactory: 1
-
-🔹 Cart & Checkout
-
-* Very Easy: 5
-
-Chart (Cart = strongest):
-
-Search        ███
-Tracking      ██
-Cart          █████
-
-Analysis:
-
-* Cart system is the strongest feature
-* Search and tracking are good but slightly inconsistent
-
-Conclusion:
-Core functionality works very well, especially checkout.
+* Implement password hashing to improve security
+* Add authentication to restrict access to the producer dashboard
+* Improve the consistency and layout of the user interface
+* Introduce delivery tracking and status updates
+* Display stock availability to customers
+* Improve navigation by reducing the use of multiple windows
 
 ⸻
 
-✅ Q7 – Producer Dashboard (Rating)
+Validity of Feedback
 
-Data:
-
-* 5/5: 2
-* 4/5: 3
-
-Chart:
-
-5 ███
-4 ██
-
-Analysis:
-Dashboard is effective but has minor usability/design issues.
-
-Conclusion:
-Producer dashboard is good but can be improved visually and structurally.
+The feedback collected is considered valid as it includes responses from both technical and non-technical users and uses measurable rating-based questions. This allows for clear comparison of responses. However, the sample size was limited to five users, meaning the results may not fully represent a larger user base.
 
 ⸻
 
-✅ Q8 – System Performance
+Conclusion
 
-Data:
-
-* Yes: 5
-
-Chart:
-
-Yes █████
-
-Analysis:
-No crashes or errors reported.
-
-Conclusion:
-System is stable and reliable.
-
-⸻
-
-✅ Q9 – Overall Rating
-
-Data:
-
-* 5/5: 3
-* 4/5: 2
-
-Chart:
-
-5 ███
-4 ██
-
-Analysis:
-Very high satisfaction overall.
-
-Conclusion:
-The system successfully meets user requirements.
-
-⸻
-
-✅ Q10 – Most Liked Features
-
-Responses:
-
-* Cart & checkout
-* Customer dashboard
-* Search feature
-* Tracking system
-* Producer dashboard
-
-Analysis:
-Different users preferred different features → system is well-rounded.
-
-Conclusion:
-No single weak feature — multiple strengths across the system.
-
-⸻
-
-✅ Q11 – Suggested Improvements
-
-Key Themes Identified:
-
-* 🔐 Security (hash passwords, restrict producer access)
-* 🎨 UI improvements (spacing, consistent product cards)
-* 📦 Features (stock display, delivery tracking)
-* 🖥️ UX improvement (single window navigation)
-
-Analysis:
-Feedback is specific and actionable → very good quality responses.
-
-Conclusion:
-Clear improvements identified for next version.
-
-⸻
-
-🧠 OVERALL SYSTEM EVALUATION (FINAL CONCLUSION)
-
-The Greenfield Local Hub system performed very well across all test areas. Users found the system easy to use, visually clear, and functionally effective. Key features such as the cart, checkout system, and tracking functionality were highly rated, showing that the core requirements were successfully met.
-
-The system also demonstrated strong performance and reliability, with all users confirming it ran smoothly without errors.
-
-However, feedback identified several areas for improvement, including:
-
-* Enhancing security (e.g. password hashing and restricted access)
-* Improving user interface consistency
-* Adding more advanced features such as delivery status and stock visibility
-
-Overall, the system is a successful solution that meets user needs, with clear opportunities for further development in future versions.
+In conclusion, the Greenfield Local Hub system is a successful solution that meets its intended purpose. It provides a user-friendly interface, reliable performance, and effective functionality. While the system performs well overall, improvements in security, user interface design, and additional features would enhance its effectiveness further.
 
 ⸻
 
